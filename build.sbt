@@ -28,12 +28,13 @@ val circeVersion = "0.14.1"
 
 
 lazy val root = (project in file("."))
-  .aggregate(hw11)
+  .aggregate(hw01)
   .settings(name := "homework")
 
-lazy val hw11 = (project in file("hw_01"))
+lazy val hw01 = (project in file("hw_01"))
   .settings(
     name := "hw_01",
+    mainClass := Option("ru.unlocker.slurm.spark.Work012"),
     libraryDependencies ++= Seq(
       "io.circe" %% "circe-core",
       "io.circe" %% "circe-generic",
