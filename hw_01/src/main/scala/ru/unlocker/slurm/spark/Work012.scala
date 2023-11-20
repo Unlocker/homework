@@ -48,19 +48,19 @@ object Work012 {
       val parsingResult: Either[Error, List[CountrySource]] = decode[List[CountrySource]](bufSource.mkString)
       println(s"Результат разбора: ${parsingResult.getClass.getSimpleName}")
       // выборка и сортировка списка
-      parsingResult.map(
+      parsingResult
+        .map(
           _.filter(_.region == "Africa")
             .sortWith((x, y) => x.area > y.area)
             .take(10)
-            .map(createDto)
-        )
+            .map(createDto))
         // запись результата
-        .foreach {
-          dtos =>
-            val filename = "result.json"
-            Files.write(Paths.get(filename), dtos.asJson.toString().getBytes(UTF_8))
-            println(s"Файл $filename успешно сформирован")
+        .foreach { dtos =>
+          val filename = "result.json"
+          Files.write(Paths.get(filename), dtos.asJson.toString().getBytes(UTF_8))
+          println(s"Файл $filename успешно сформирован")
         }
     }
   }
+
 }
